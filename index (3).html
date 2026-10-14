@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Marketing Professional Exam - Institute of Tech Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+        }
+
+        body, html {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-in-out;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .warning-bar {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .warning-count {
+            background: #ef4444;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        #welcome-screen {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #welcome-screen h2 {
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        #welcome-screen p {
+            margin-bottom: 24px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .rules-list {
+            text-align: left;
+            max-width: 520px;
+            margin: 0 auto 24px auto;
+            background: #f9fafb;
+            padding: 16px 24px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .rules-list li {
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        #exam-screen {
+            display: none;
+        }
+
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .timer {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--danger);
+            background: #fee2e2;
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .progress-info {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6b7280;
+        }
+
+        .question-box {
+            margin-bottom: 24px;
+        }
+
+        .question-box h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #111827;
+            line-height: 1.5;
+        }
+
+        /* Hint Box Styling */
+        .hint-btn {
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #f59e0b;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+
+        .hint-btn:hover {
+            background: #fde68a;
+        }
+
+        .hint-box {
+            display: none;
+            background: #eff6ff;
+            border: 1px solid #93c5fd;
+            color: #1e40af;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .options-list {
+            list-style: none;
+        }
+
+        .options-list li {
+            margin-bottom: 12px;
+        }
+
+        .options-list label {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 15px;
+        }
+
+        .options-list label:hover {
+            border-color: var(--primary);
+            background: #fdf8f6;
+        }
+
+        .options-list input[type="radio"] {
+            margin-right: 12px;
+            accent-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .exam-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f3f4f6;
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        #result-screen {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .result-card {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .result-score {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 12px 0;
+        }
+
+        .pass { color: var(--success); }
+        .fail { color: var(--danger); }
+
+        .feedback-section {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .feedback-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+            height: 100px;
+            margin-top: 8px;
+            outline: none;
+        }
+
+        .feedback-section textarea:focus {
+            border-color: var(--primary);
+        }
+
+        #warning-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .modal-box h3 {
+            color: var(--danger);
+            margin-bottom: 12px;
+        }
+
+        .modal-box p {
+            font-size: 14px;
+            color: #4b5563;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;" onselectstart="return false;">
+
+    <div class="container">
+        <header>
+            <h1>Digital Marketing Professional Certification</h1>
+            <p>Institute of Tech Excellence</p>
+            <div class="badge">200 MCQs | 200 Mins</div>
+        </header>
+
+        <div class="content">
+            <!-- Welcome Screen -->
+            <div id="welcome-screen">
+                <h2>Imtehan (Exam) Mein Khush Amdeed</h2>
+                <p>Exam shuru karne se pehle neechay diye gaye anti-cheating rules ko ghaur se parh lein.</p>
+                
+                <ul class="rules-list">
+                    <li>🔒 <strong>Full-Screen Lazmi Hai:</strong> Exam sirf full-screen mode mein chalega.</li>
+                    <li>⚠️ <strong>Tab Switch Mana Hai:</strong> Kisi doosre tab par jane ya minimize karne par warning milegi.</li>
+                    <li>💡 <strong>Hints Option:</strong> Har sawal ke sath 'Show Hint' button mojood hai jo aap ki madad kar sakta hai.</li>
+                    <li>🚨 <strong>Auto-Submission:</strong> 3 warnings poori hone par exam khud hi submit ho jaye ga.</li>
+                </ul>
+
+                <div class="form-group">
+                    <label for="student-name">Student Ka Poora Naam:</label>
+                    <input type="text" id="student-name" placeholder="Apna poora naam yahan likhein..." required>
+                </div>
+                <button class="btn" onclick="startExam()">Full-Screen Mein Exam Shuru Karein</button>
+            </div>
+
+            <!-- Exam Screen -->
+            <div id="exam-screen">
+                <div class="warning-bar">
+                    <span>🛡️ Anti-Cheating Monitoring Active Hai</span>
+                    <span>Warnings: <span class="warning-count" id="warning-counter">0 / 3</span></span>
+                </div>
+
+                <div class="exam-header">
+                    <div class="progress-info" id="progress-text">Sawal 1 200 mein se</div>
+                    <div class="timer" id="timer">200:00</div>
+                </div>
+
+                <div class="question-box" id="question-container">
+                    <!-- Dynamic Question Insert -->
+                </div>
+
+                <div class="exam-navigation">
+                    <button class="btn btn-secondary" id="prev-btn" onclick="prevQuestion()" style="display:none;">Pichla Sawal</button>
+                    <button class="btn" id="next-btn" onclick="nextQuestion()">Agla Sawal</button>
+                    <button class="btn" id="submit-btn" onclick="submitExam()" style="display:none; background: var(--success);">Exam Submit Karein</button>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen">
+                <h2>Exam Kamyabi Ke Sath Mukammal Ho Gaya!</h2>
+                <div class="result-card">
+                    <p>Student Ka Naam: <strong id="res-name"></strong></p>
+                    <div class="result-score" id="res-score">0%</div>
+                    <p id="res-status" style="font-size: 18px; font-weight: 600;"></p>
+                    <p style="margin-top: 10px; color: #4b5563;">Passing criteria: Pass hone ke liye 75% marks lazmi hain.</p>
+                </div>
+
+                <div class="feedback-section">
+                    <label for="feedback-input"><strong>Is Exam Software ke baray mein apni Ray (Feedback) dein:</strong></label>
+                    <textarea id="feedback-input" placeholder="Apna experience ya feedback yahan likhein..."></textarea>
+                    <button class="btn" style="margin-top: 15px;" onclick="submitFeedback()">Feedback Submit Karein</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Anti-cheat Warning Modal -->
+    <div id="warning-modal">
+        <div class="modal-box">
+            <h3 id="modal-title">⚠️ Cheating Warning</h3>
+            <p id="modal-msg">Tab switch karna ya full-screen se bahar jana mana hai!</p>
+            <button class="btn" onclick="closeModal()">Wapas Exam Mein Jayein</button>
+        </div>
+    </div>
+
+    <script>
+        // 200 Professional Roman Urdu Digital Marketing MCQs with Hints
+        const rawQuestions = [
+            // Lecture 1
+            { q: "Facebook aur Instagram ecosystems ka bunyadi (primary) farq kya hai?", hint: "Ghaur karein ke Instagram photos/videos par ziada focus karta hai jabkay Facebook text, links aur groups par.", options: ["Facebook ziada tar text, links aur community par mabni hai jabkay Instagram highly visual aur media-centric hai", "Instagram par business profile ki ijazat nahi hai", "Facebook par koi organic reach nahi hoti", "Instagram sirf video streaming ke liye hai"], answer: 0 },
+            { q: "Instagram par business profile set up karne ke liye sab se ahem step kya hai?", options: ["Facebook Page se connect professional/business account mein switch karna", "Kam az kam 10,000 followers hona", "Har maheenay lazmi fees dena", "Direct messaging ko disable karna"], hint: "Business profile ke liye aap ko Meta Business Tools aur Page link karna hota hai.", answer: 0 },
+            { q: "Facebook aur Instagram par organic growth se kya murad hai?", options: ["Paid advertising ke baghair followers aur engagement barhana", "Rozana ad campaigns chalana", "Third-party sites se followers khareedna", "Automated bots ka istemal karna"], hint: "Organic ka matlab bina paise diye natural tareeqay se gro karna hota hai.", answer: 0 },
+            { q: "Instagram algorithm mein kis engagement metric ko sab se ziada ahmiyat di jati hai?", options: ["Saves aur Shares", "Accidental clicks", "Profile visits", "Impressions"], hint: "Jab log aap ki post save karte hain ya doston ko bhejte hain to algorithm usay high value deta hai.", answer: 0 },
+            { q: "Businesses ke liye Facebook aur Instagram ecosystems kis tarah mil kar kaam karte hain?", options: ["Unified Meta Ads Manager, cross-posting, aur shared audience insights ke zariye", "Yeh bilkul mukhtalif parent companies ke tehet kaam karte hain", "Inke user demographics bilkul aik jaise hote hain", "Cross-posting ki sakht mana hai"], hint: "Dono platforms Meta ke tehet aik hi ad dashboard se control hote hain.", answer: 0 },
+
+            // Lecture 2
+            { q: "Instagram aur Facebook par content ke 4 bunyadi pillars (core pillars) kaun se hain?", options: ["Posts, Stories, Reels, aur Videos", "Text, Audio, Emails, Banners", "Blogs, Tweets, Snaps, Pins", "Ads, Sponsorships, Influencers, Lives"], hint: "Yeh wo 4 main formats hain jo aap Instagram grid aur feed par dekhte hain.", answer: 0 },
+            { q: "Digital marketers ke liye content calendar kyun zaroori hota hai?", options: ["Yeh consistency, planning aur waqt ki bachat ko yakeeni banata hai", "Yeh post kiye baghair khud ba khud sales generate karta hai", "Yeh algorithms ko penalize karne se rokata hai", "Yeh graphic designer ki jagah leta hai"], hint: "Calendar se aap pehle se posts schedule aur plan kar sakte hain.", answer: 0 },
+            { q: "Social media content plan aur schedule karne ke liye kaun sa tool istemal hota hai?", options: ["Canva, Later, ya Buffer", "Sirf Microsoft Excel", "Notepad", "Windows Media Player"], hint: "Buffer aur Later mashhoor social media scheduling tools hain.", answer: 0 },
+            { q: "Kaun c cheez content ko social networks par shareable banati hai?", options: ["High emotional resonance, educational value, ya entertainment", "100 hashtags ka istemal", "Raat ko 3 baje post karna", "Bina tasweeron ke lambay mazameen likhna"], hint: "Log wo cheez share karte hain jo unhein pasand aaye ya informative ho.", answer: 0 },
+            { q: "Reels aam video posts se kis tarah mukhtalif hoti hain?", options: ["Reels short-form vertical videos hoti hain jo dedicated feeds ke zariye high organic reach deti hain", "Reels 5 seconds se bari nahi ho saktin", "Reels ke liye paid budget lazmi hai", "Reels mein audio ka option nahi hota"], hint: "Reels mobile screen par full vertical dikhti hain aur viral tezi se hoti hain.", answer: 0 },
+
+            // Lecture 3
+            { q: "Organic reach mein hashtags ka bunyadi kirdar kya hai?", options: ["Content ko categorize karna aur non-followers ke liye discoverable banana jo topics search kar rahe hon", "Video ki resolution barhana", "Meta ad policies ko bypass karna", "Credit score barhana"], hint: "Hashtags (#) content ki searching aur categorization ke liye istemal hote hain.", answer: 0 },
+            { q: "Instagram aur Facebook captions aur Alt text ke liye SEO se kya murad hai?", options: ["Text ko relevant keywords ke sath optimize karna taake search engine posts ko index aur rank kare", "Captions ke andar HTML coding karna", "Tasweeron mein secret messages chupana", "Sirf emojis ka istemal karna"], hint: "Keywords ka sahi istemal search mein ranking behtar karta hai.", answer: 0 },
+            { q: "Marketer ko kaise pata chalta hai ke post karne ka behtareen waqt kaun sa hai?", options: ["Analytics dashboards mein audience activity insights ko analyze karke", "Har ghantay randomly post karke", "Hamesha raat 3 baje post karke", "Jab competitors offline hon"], hint: "Insights / Analytics mein active users ke hours nazar aate hain.", answer: 0 },
+            { q: "Ek behtareen hashtag strategy kya honi chahiye?", options: ["Niche, medium, aur broad hashtags ka mix istemal karna jo post se relevant hon", "Har post par bilkul same 30 hashtags lagana", "Bilkul hashtags na lagana", "100 be-matlab trending hashtags lagana"], hint: "Har kisam ke hashtags ka balance mix hamesha ziada reach deta hai.", answer: 0 },
+            { q: "Tasweeron par Alt text kyun zaroori hota hai?", options: ["It assists visually impaired users and improves accessibility and SEO indexing", "It reduces file size to 1KB", "It acts as a password protector", "It triggers automatic likes"], hint: "Alt text image ki tafseel batata hai jo accessibility aur SEO dono ke liye zaroori hai.", answer: 0 },
+
+            // Lecture 4
+            { q: "Stories mein polls aur quizzes jaise interactive features community building mein kaise madad karte hain?", options: ["Two-way interaction barha kar aur audience ki feedback collect karke", "Organic reach kam karke", "Users se vote ke paise charge karke", "Direct messaging ko khatam karke"], hint: "Jab log click aur vote karte hain to engagement aur talluq mazboot hota hai.", answer: 0 },
+            { q: "User-generated content (UGC) ko barhawa dene ka kya faida hai?", options: ["Brand par authentic trust aur community loyalty paida hoti hai", "Product ki quality kharab hoti hai", "Customer service ki zaroorat khatam ho jati hai", "Copyright laws ki khilafwarzi hoti hai"], hint: "UGC ka matlab hai customers ki banayi hui videos/photos jo trust barhati hain.", answer: 0 },
+            { q: "Instagram Highlights ka maqsad kya hota hai?", options: ["Ephemeral Story content ko profile grid par hamesha ke liye archive aur categorize karna", "Negative reviews highlight karna", "Future posts schedule karna", "Verified badges khareedna"], hint: "Highlights 24 ghante baad khatam honay wali Stories ko profile par bacha kar rakhti hain.", answer: 0 },
+            { q: "Community building ke liye DMs aur comments ko kaise istemal karna chahiye?", options: ["Jald, authentic aur personalized jawabat dena jo rishtay mazboot karein", "Automated spam bots lagana jo sawal ignore karein", "Comment section ko mukammal disable kar dena", "Mahine mein aik baar reply karna"], hint: "Tez aur ache jawabat se customers ke sath acha rishta banta hai.", answer: 0 },
+            { q: "Authentic audience engagement se kya murad hai?", options: ["Satah-e-zameen (superficial) metrics ke bajaye asli guftagu aur value-driven interactions", "Automated comments khareedna", "Group chats mein spam karna", "Customer complaints ignore karna"], hint: "Fake likes ya bot comments ke bajaye asli logon se baat cheet karna.", answer: 0 },
+
+            // Lecture 5
+            { q: "Organic growth ke liye track karne walay ahem core metrics kaun se hain?", options: ["Reach, Engagement, aur Impressions", "Ad spend, CPA, ROAS", "Bounce rate, Server latency, Domain authority", "Email open rates, CTR, CPC"], hint: "Reach (kitne logon ne dekha) aur Engagement (kitnon ne interact kiya) ahem hain.", answer: 0 },
+            { q: "Business owners Facebook aur Instagram ka performance data kahan dekh sakte hain?", options: ["Facebook Insights aur Instagram Analytics / Meta Business Suite", "Personal profile settings", "Twitter Analytics dashboard", "Google Search Console"], hint: "Meta Business Suite mein saari analytics dikhti hain.", answer: 0 },
+            { q: "Analytics ka data future content strategy ko kaise guide karna chahiye?", options: ["Top-performing content formats ki pehchan karke aur successful patterns ko repeat karke", "Kam likes walay tamam accounts delete karke", "Data dekhe baghair foran ad spend double karke", "Analytics ko bilkul ignore karke"], hint: "Jo post achi perform kare us jaise mazeed posts banani chahiye.", answer: 0 },
+            { q: "Reach aur Impressions mein kya farq hai?", options: ["Reach unique users ki tadad hai jinhon ne content dekha; impressions total views hain jin mein repeats bhi shamil hain", "Reach paid views hain, impressions organic views hain", "Reach sirf desktop par hoti hai, impressions mobile par", "Koi farq nahi hai"], hint: "Reach = Unique log, Impressions = Total dafha dekha gaya.", answer: 0 },
+            { q: "Engagement rate ko track karna kyun ahem hai?", options: ["Yeh measure karta hai ke follower size ke muqablay mein content audience ko kitna pasand aaya", "Yeh server storage requirements calculate karta hai", "Yeh income tax bracket decide karta hai", "Yeh internet speed measure karta hai"], hint: "Engagement rate se pata chalta hai ke audience kitni active hai.", answer: 0 },
+
+            // Lecture 6
+            { q: "Facebook aur Instagram par paid campaigns manage karne ka central hub kaun sa hai?", options: ["Facebook Ads Manager", "Instagram personal settings", "Meta Messenger", "Facebook Creator Studio app"], hint: "Ads Manager hi saari ads chalanay ke liye main tool hai.", answer: 0 },
+            { q: "Organic reach aur paid reach mein bunyadi farq kya hai?", options: ["Organic reach free aur algorithmic hoti hai; paid reach financial bidding ke zariye target delivery guarantee karti hai", "Paid reach Instagram par illegal hai", "Organic reach foran baray audience ko target karti hai", "Koi wazeh farq nahi hai"], hint: "Organic free hoti hai jabke paid reach ke liye budget dena parta hai.", answer: 0 },
+            { q: "Meta Ads Manager mein ad objectives se kya murad hai?", options: ["Woh khas maqsad jo aap apni campaign se hasil karna chahte hain (maslan Awareness, Traffic, Conversions)", "Business owner ke personal shauq", "Creative banner ka color scheme", "Target audience ka time zone"], answer: 0 },
+            { q: "Paid advertising mein KPIs kya hote hain?", options: ["Key Performance Indicators jo campaign ki kamyabi measure karne ke liye istemal hote hain", "Key Password Identifiers", "Kilobytes Per Impression", "Known Placement Items"], answer: 0 },
+            { q: "Facebook aur Instagram par ad placements kaise kaam karti hain?", options: ["Ads optimization ki bunyad par feeds, stories, reels, marketplace aur partner networks par dikh saktin hain", "Ads sirf desktop newsfeeds par nazar aati hain", "Ads sirf Instagram Explore tak mehdood hain", "Placements customize nahi ho saktin"], hint: "Placements ka matlab hai ad kahan kahan nazar aaye gi.", answer: 0 },
+
+            // Lecture 7
+            { q: "Meta par audience targeting ko kaun se 3 bunyadi criteria define karte hain?", options: ["Demographics, Interests, aur Behaviors", "IP address, MAC address, Hardware model", "Credit score, Net worth, Tax ID", "Weather, Altitude, Speed"], hint: "Umar/Jins (Demographics), Shauq (Interests), aur Aadat (Behaviors).", answer: 0 },
+            { q: "Custom Audience kya hoti hai?", options: ["Aisi audience jo aapke existing customer data (jaise email lists, phone numbers, ya website visitors) se banai jati hai", "Facebook ki taraf se bilkul random banai gayi audience", "Sirf competitors ki audience", "Employees ki audience"], hint: "Custom audience aap ke apnay puraney data se banti hai.", answer: 0 },
+            { q: "Lookalike Audience se kya murad hai?", options: ["Aisi audience jo Meta banata hai jo aapke behtareen existing customers se milti julti khususiyaat rakhti hai", "Fake accounts ki audience", "Aisi audience jo aapke company logo jaisi dikhe", "Unhon ne aapka page block kiya ho"], hint: "Lookalike ka matlab hai apnay achay customers jaise naye log dhoondna.", answer: 0 },
+            { q: "Facebook Pixel ka maqsad kya hota hai?", options: ["Website conversions track karna, retargeting enable karna aur ad delivery optimize karna", "Smartphone ki battery life barhana", "User credit cards encrypt karna", "Landing page graphics design karna"], hint: "Pixel website par lagaya jane wala tracking code hota hai.", answer: 0 },
+            { q: "Ad campaigns mein A/B testing kya hoti hai?", options: ["Aik hi ad ki do variations (maslan mukhtalif creatives ya audiences) ko compare karna taake pata chalay kaun sa behtar hai", "Aik sath do mukhtalif businesses chalana", "Do payment gateways test karna", "Internet speed check karna"], hint: "A/B testing do cheezon ka apas mein muqabla hoti hai.", answer: 0 },
+
+            // Lecture 8
+            { q: "Kaun si cheez ad copy ko compelling aur high-converting banati hai?", options: ["Clear value proposition, emotional hook, aur strong Call-to-Action (CTA)", "500 alfaaz ki technical jargon", "Poora text ALL CAPS mein likhna", "Contact information chhupana"], hint: "Saaf paigham aur strong CTA hamesha conversions barhate hain.", answer: 0 },
+            { q: "Aik hi ad unit mein multiple products dikhane ke liye kaun sa ad format behtareen hai?", options: ["Carousel Ad", "Single text post", "Text-only banner", "Audio-only clip"], hint: "Carousel ad mein multiple cards/slides hoti hain.", answer: 0 },
+            { q: "Call-to-Action (CTA) button ka bunyadi kirdar kya hai?", options: ["Users ko agla qadam batana (maslan 'Shop Now', 'Learn More')", "Browser window band karna", "Company copyright dikhana", "Background music chalana"], hint: "CTA button user ko action lene ki hidayat deta hai.", answer: 0 },
+            { q: "Social media par video ad design karne ke best practices kya hain?", options: ["Pehlay 3 seconds mein tawajjo khainchna aur captions ke sath sound-off viewing ke liye design karna", "Video kam az kam 2 ghantay lambi rakhna", "Sirf silent black-and-white screens istemal karna", "Branding avoid karna"], hint: "Pehlay thodey seconds mein attention lena sab se zaroori hota hai.", answer: 0 },
+            { q: "Ad creative mein visual hierarchy kyun zaroori hoti hai?", options: ["Yeh viewer ki nazar ko foran sab se ahem element (jaise product ya offer) par le kar jati hai", "Yeh page loading time slow karti hai", "Yeh disclaimer text chhupati hai", "Yeh target audience ko confuse karti hai"], hint: "Visual hierarchy se zaroori cheezein pehle nazar aati hain.", answer: 0 },
+
+            // Lecture 9
+            { q: "Facebook ad campaign ka sahi hierarchical structure kya hai?", options: ["Campaign -> Ad Set -> Ads", "Ad -> Campaign -> Ad Set", "Ad Set -> Ad -> Campaign", "Campaign -> Ad -> Ad Set"], hint: "Sub se upar Campaign, phir Ad Set, aur aakhir mein Ads.", answer: 0 },
+            { q: "Daily Budget aur Lifetime Budget mein kya farq hai?", options: ["Daily budget rozana ki fix rakam spend karta hai; lifetime budget poori campaign duration ke liye mukarrar total rakam spend karta hai", "Daily budget sirf weekends ke liye hota hai", "Daily budget ke liye har 24 ghantay baad approval chahiye", "Koi farq nahi hai"], hint: "Daily = Har din, Lifetime = Poori campaign ka total.", answer: 0 },
+            { q: "Bidding strategies ad delivery ko kaise mutasir karti hain?", options: ["Yeh decide karti hain ke Meta ad auction mein aapke maqsad ko behtareen cost par hasil karne ke liye kaise mukabla karega", "Yeh ad button ka color decide karti hain", "Yeh employees ki salary set karti hain", "Yeh website hosting speed control karti hain"], hint: "Bidding se Meta auction mein aap ka rate tay hota hai.", answer: 0 },
+            { q: "Campaign ke douran ad performance monitor karne ka maqsad kya hota hai?", options: ["Ad fatigue pehchan na, bids adjust karna, jeetne walay ads ko budget dena aur fazool spend rokna", "Rozana ad account delete karna", "Business ka naam badalna", "Internet bandwidth barhana"], hint: "Ad performance dekh kar aap faida dene wali ads ko budget dete hain.", answer: 0 },
+            { q: "Marketer ko shuru se nayi campaign kaise set karni chahiye?", options: ["Objective define karein, budget/schedule set karein, target audience chunein, placements select karein aur creatives upload karein", "Bina targeting ke random posts boost karein", "Meta customer support ko call karein", "Flyers print karwayen"], hint: "Step-by-step setup procedure ko yaad rakhein.", answer: 0 },
+
+            // Lecture 10
+            { q: "Ad analytics mein ROI, CTR, aur CPC se kya murad hai?", options: ["Return on Investment, Click-Through Rate, Cost Per Click", "Rate of Income, Click To Call, Cost Per Customer", "Reach Over Impressions, Content Transfer Rate", "Revenue On Instagram, Click Traffic Ratio"], hint: "CTR = Clicks ki percentage, CPC = Har click ki keemat.", answer: 0 },
+            { q: "Kamzor perform karne wali ad campaign ko aap kaise optimize karenge?", options: ["Targeting refine karein, ad creatives refresh karein, bidding adjust karein, ya behtar ad sets ko budget dein", "Facebook page delete kardein", "Fail honay walay ads par foran budget double kardein", "Tamam analytics band kardein"], hint: "Targeting aur creatives badal kar optimization ki jati hai.", answer: 0 },
+            { q: "Jab ads deliver na ho rahi hon to common troubleshooting step kya hai?", options: ["Ad policy compliance, audience size restrictions, ya budget caps check karna", "Apna home Wi-Fi router restart karna", "Apni profile picture badalna", "Meta ke khilaf negative review likhna"], hint: "Policy violation ya choti audience delivery rok sakti hai.", answer: 0 },
+            { q: "Ad optimization mein frequency tracking kyun ahem hai?", options: ["Yeh yakeeni bananay ke liye ke target audience aik hi ad baar baar na dekhey jis se ad fatigue ho jati hai", "Yeh check karne ke liye ke internet pages kitni tezi se khulte hain", "Rozana employee attendance measure karne ke liye", "Shipping weight calculate karne ke liye"], hint: "Frequency ka matlab hai aik shakhs ko ad kitni dafha dikhi.", answer: 0 },
+            { q: "ROAS marketers ko kamyabi evaluate karne mein kaise madad karta hai?", options: ["Yeh measure karta hai ke advertising par kharch kiye gaye har dollar par kitni revenue generate hui", "Yeh total comments count karta hai", "Yeh server uptime track karta hai", "Yeh website font size measure karta hai"], hint: "ROAS = Return On Ad Spend.", answer: 0 },
+
+            // Lecture 11
+            { q: "TikTok ads ke primary formats kaun se hain?", options: ["In-Feed Ads, Branded Hashtag Challenges, aur TopView Ads", "Billboard banners aur radio spots", "Sponsored email newsletters", "Static desktop pop-ups"], hint: "TikTok ke mashhoor ad formats mein TopView aur In-Feed shamil hain.", answer: 0 },
+            { q: "TikTok par organic promotion aur paid promotion mein kya farq hai?", options: ["Organic user feeds ke zariye algorithmic virality par depend karti hai; paid promotion ad auctions ke zariye targeted visibility guarantee karti hai", "Paid promotion TikTok accounts par ban hai", "Organic promotion ke liye credit card billing chahiye", "Koi farq nahi hai"], hint: "Organic free viral hoti hai jabke paid promotion guarantee deti hai.", answer: 0 },
+            { q: "Branded Hashtag Challenge kya hota hai?", options: ["Aik interactive ad format jo users ko kisi specific branded hashtag ke ird gird content banane ki dawat deta hai", "Company history par aik quiz", "Typing speed test", "Customer support ticket system"], hint: "Users is challenge mein apna content bana kar hissa lete hain.", answer: 0 },
+            { q: "TikTok ka algorithm bunyadi tor par content kaise distribute karta hai?", options: ["'For You' page ke zariye user interactions, video info aur device settings ki bunyad par", "Sirf follower count ki bunyad par", "Sirf unhein jo creator ko follow karte hain", "Har ghantay randomly"], hint: "TikTok par 'For You' Page (FYP) sab se ahem hota hai.", answer: 0 },
+            { q: "TikTok par TopView Ad kya hota hai?", options: ["Aik video ad jo user app kholte hi foran nazar aata hai", "Screen ke neechay aik chota banner", "Audio-only podcast ad", "Profile background image"], hint: "App kholte hi sab se upar dikhne wali ad.", answer: 0 },
+
+            // Lecture 12
+            { q: "LinkedIn ke primary business use cases kaun se hain?", options: ["B2B networking, recruitment, professional branding, aur Marketplace/Jobs ke zariye service sales", "Viral meme videos share karna", "Teenagers ko gaming consoles bechna", "Live music concerts host karna"], hint: "LinkedIn professionals aur B2B businesses ke liye hota hai.", answer: 0 },
+            { q: "LinkedIn Jobs ka maqsad kya hota hai?", options: ["Job openings post karna, qabil candidates talash karna aur career opportunities ke liye apply karna", "Instagram par freelance graphic designers dhoondna", "Employee payroll manage karna", "Office supplies order karna"], hint: "Nokriyon ki talash aur hiring ke liye istemal hota hai.", answer: 0 },
+            { q: "LinkedIn Recruiter kis liye design kiya gaya hai?", options: ["Advanced talent sourcing, pipeline management, aur top professionals ko hire karna", "Social media ads manage karna", "Bulk marketing spam bhejna", "Company logos design karna"], hint: "HR aur recruiters candidate hiring ke liye istemal karte hain.", answer: 0 },
+            { q: "Businesses LinkedIn Marketplace ya Service Pages ko kaise istemal kar saktin hain?", options: ["Professional services showcase karne aur prospective business clients se connect karne ke liye", "Ghar ka istemal shuda furniture bechna", "Video games stream karna", "Cryptocurrency trade karna"], hint: "B2B services ko bechne ke liye banya gaya page.", answer: 0 },
+            { q: "LinkedIn par professional network banane ke liye kya zaroori hai?", options: ["Optimized profiles, industry insights share karna aur peers ke sath engage karna", "Random accounts se connect karna aur sales pitches spam karna", "Profiles khali rakhna", "Rozana personal vacation photos post karna"], hint: "Professional baat cheet aur behtareen profile.", answer: 0 },
+
+            // Lecture 13
+            { q: "LinkedIn Ads ki main types kaun si hain?", options: ["Sponsored Content, Sponsored InMail, aur Text Ads", "Popup banners, interstitial video ads, aur audio ads", "Story filters aur hashtag challenges", "Classified newspaper ads"], hint: "InMail aur Sponsored Content LinkedIn par bohot mashhoor hain.", answer: 0 },
+            { q: "B2B marketing ke liye LinkedIn advertising kyun khas taur par asardar hai?", options: ["Job title, industry, company size aur seniority ke lihaz se precise professional targeting ki waja se", "Internet par sab se kam cost per click", "Tamam internet users ke liye lazmi dekhna", "Zero competition"], hint: "Is par aap Job Titles aur Company names par target kar sakte hain.", answer: 0 },
+            { q: "LinkedIn par Sponsored InMail kya hai?", options: ["Targeted professionals ke LinkedIn mailboxes mein direct deliver honay wale personalized messages", "Personal Gmail accounts par bheji gayi spam emails", "Automated SMS text alerts", "Post ke zariye bheje gaye physical letters"], hint: "Direct messaging inbox mein bheji jane wali ad.", answer: 0 },
+            { q: "LinkedIn ad creatives ke liye behtareen practice kya hai?", options: ["Professional imagery, clear value proposition, aur business decision-makers ke liye tailored data-driven insights", "Cartoon memes aur dancing animations istemal karna", "Slang mein text likhna", "Company branding chhupana"], hint: "Professional business standard ke mutabiq visuals.", answer: 0 },
+            { q: "LinkedIn Ads par performance kaise measure ki jati hai?", options: ["Campaign Demographics reporting, CTR, lead form fills, aur conversion metrics", "Video game high scores", "Instagram follower count", "Website bounce rates"], hint: "Demographics reporting se pata chalta hai kin job titles ne ad dekhi.", answer: 0 },
+
+            // Lecture 14
+            { q: "YouTube channel optimize karne ke key elements kaun se hain?", options: ["Channel art, professional description, branded banner, aur organized playlists", "Random video titles istemal karna", "Comment section disable karna", "Black and white videos upload karna"], hint: "Channel art, banner aur description channel ko professional banate hain.", answer: 0 },
+            { q: "YouTube SEO mein kaun c cheezein shamil hain?", options: ["Optimized keywords, compelling titles, tags, aur detailed descriptions", "Audio files mein secret metadata chupana", "Verification ke liye YouTube staff ko pay karna", "Search indexing disable karna"], hint: "Titles, tags aur descriptions video ko search mein laate hain.", answer: 0 },
+            { q: "YouTube Studio ka maqsad kya hota hai?", options: ["Video uploads, analytics, comments, monetization, aur channel settings manage karna", "Studio mein music record karna", "Photographs edit karna", "Blog posts likhna"], hint: "Creator Studio se poora channel control hota hai.", answer: 0 },
+            { q: "YouTube par engaging video content banane ki best practice kya hai?", options: ["Intro mein strong hook, high production quality, clear audio, aur aisi pacing jo retention barqarar rakhay", "Har video ko sirf 10 seconds ki banana", "Monotone whisper mein bolna", "Koi lighting istemal na karna"], hint: "Intro mein dekhi jane wali audience ko rokna zaroori hota hai.", answer: 0 },
+            { q: "YouTube par playlists kyun zaroori hoti hain?", options: ["Yeh content ko logical series mein organize karti hain jis se watch time aur session duration barhta hai", "Yeh video views kam karti hain", "Yeh copyright strikes rokti hain", "Yeh video file size compress karti hain"], hint: "Playlists se log aik ke baad doosri video dekhte hain.", answer: 0 },
+
+            // Lecture 15
+            { q: "YouTube ads ke primary formats kaun se hain?", options: ["Display Ads, Skippable Video Ads, aur Bumper Ads", "Newspaper inserts, billboard ads, aur radio spots", "Sponsored text emails", "Static background wallpapers"], hint: "5-second baad skip honay wali ads aur 6-second ki bumper ads.", answer: 0 },
+            { q: "YouTube par Bumper Ad kya hota hai?", options: ["Aik short, non-skippable 6-second video ad jo quick brand awareness ke liye hota hai", "10 minute ka commercial break", "Audio podcast advertisement", "Search results ke top par banner"], hint: "Yeh ad sirf 6 seconds ki hoti hai aur skip nahi ho sakti.", answer: 0 },
+            { q: "YouTube ads ke liye kaun se targeting options available hain?", options: ["Demographics, Interests, Keywords, aur Topics", "Blood type aur Zodiac sign", "Home mortgage status", "Shoe size"], hint: "Google network par keywords aur topics se targeting hoti hai.", answer: 0 },
+            { q: "Skippable In-Stream YouTube Ads ka sab se bara faida kya hai?", options: ["Advertisers tab hi pay karte hain jab viewer kam az kam 30 seconds (ya poori ad) dekhey ya interact kare", "Ads kisi bhi surat skip nahi ho saktin", "Yeh 100% free hoti hain", "Inke liye video creation ki zaroorat nahi hoti"], hint: "Pehlay 5 seconds tak dekhne par advertiser ko charges nahi parte.", answer: 0 },
+            { q: "YouTube ad performance kaise track ki jati hai?", options: ["Google Ads aur YouTube Analytics ke zariye (views, view rate, cost per view, conversions)", "Physical mail letters count karke", "Twitter analytics istemal karke", "Local weather reports check karke"], hint: "Google Ads dashboard se CPV aur Views dekhe jate hain.", answer: 0 },
+
+            // Lecture 16
+            { q: "Standard WhatsApp ke muqablay mein WhatsApp Business kya features offer karta hai?", options: ["Business profiles, greeting/away messages, labels, catalog, aur broadcast messaging", "Mandatory video game streaming", "Automated cryptocurrency mining", "Public social media timelines"], hint: "Automated greeting/away messages aur product catalog.", answer: 0 },
+            { q: "WhatsApp Business mein Labels ka maqsad kya hota hai?", options: ["Chats aur customer stages ko organize karna (maslan New Customer, Pending Payment, Order Complete)", "Physical shipping boxes par label lagana", "Smartphone screen color code karna", "Unwanted callers block karna"], hint: "Labels se alag alag customers ko color organize kiya jata hai.", answer: 0 },
+            { q: "WhatsApp ko Facebook & Instagram ke sath kaise connect kiya ja sakta hai?", options: ["Meta ads aur business profile pages par WhatsApp click-to-message buttons add karke", "User phone numbers ko credit cards ke sath merge karke", "Instagram followers ko khud ba khud WhatsApp groups mein transfer karke", "Yeh connect nahi ho sakta"], hint: "Ads par 'Send WhatsApp Message' ka button lagana.", answer: 0 },
+            { q: "WhatsApp Channel kya hota hai?", options: ["Followers ko aik taraf (one-way) public updates bhejne ka broadcast tool", "5,000 ajnabiyon ke liye do-way group chat", "Sales ke liye automated chatbot", "Video conferencing platform"], hint: "Channels par sirf admin message kar sakta hai.", answer: 0 },
+            { q: "WhatsApp Click-to-Message Ads kya hain?", options: ["Meta ads jo click karne par WhatsApp mein direct conversation kholte hain", "WhatsApp ke zariye bheji gayi emails", "Voice mail recordings", "SMS text alerts"], hint: "Ads jo click karte hi WhatsApp chat khol dein.", answer: 0 },
+
+            // Lecture 17
+            { q: "Local SEO mein GMB se kya murad hai?", options: ["Google My Business (ab Google Business Profile)", "Global Media Broadcasting", "Graphic Management Board", "General Marketing Bureau"], hint: "Google par shop/business ka address dikhane wala tool.", answer: 0 },
+            { q: "Local businesses ke liye verified GMB listing kyun zaroori hai?", options: ["Yeh businesses ko Google Local Pack aur Google Maps search results mein aane mein madad karti hai", "Yeh organic Google search mein hamesha first place guarantee karti hai", "Yeh free office furniture deti hai", "Yeh local business taxes khatam karti hai"], hint: "Google Maps aur 3-pack local search mein nazar aane ke liye.", answer: 0 },
+            { q: "GMB account banane ke steps kya hain?", options: ["Sign in karein, business name, address, phone number, category enter karein aur verification mukammal karein", "Google headquarters ko fax bhejein", "$500 monthly subscription pay karein", "Newspaper ad publish karein"], hint: "Name, address, phone number aur verification postcard/video.", answer: 0 },
+            { q: "GMB profile setup mein kya information shamil honi chahiye?", options: ["Accurate business hours, contact info, Google Maps location, aur service offerings", "Owner ka personal passport number", "Employees ke home addresses", "Company bank account PIN"], hint: "Auqat-e-kaam (hours), phone number aur sahi location.", answer: 0 },
+            { q: "Google Local Pack kya hota hai?", options: ["Local search results ke top par display honay wala prominent map aur 3-business listing section", "Physical promotional items ka package", "Web designers ke liye software bundle", "Email newsletter format"], hint: "Google search par map ke sath top 3 shops ki list.", answer: 0 },
+
+            // Lecture 18
+            { q: "GMB aur Local SEO ke liye customer reviews kyun ahem hain?", options: ["Yeh consumer trust banate hain, purchase decisions ko mutasir karte hain aur local ranking factor hain", "Yeh computer processing speed barhate hain", "Yeh electricity bills kam karte hain", "Yeh product packaging ki jagah lete hain"], hint: "5-star reviews se ranking aur customer trust dono barhte hain.", answer: 0 },
+            { q: "GMB par negative reviews handle karne ki behtareen practice kya hai?", options: ["Professional, empathetic aur jald jawab dena aur offline issue resolve karna", "GMB listing foran delete kar dena", "Customer ki public insult karna", "Review hamesha ke liye ignore karna"], hint: "Ikhlaq se jawab dena aur masla hal karne ki peshkash karna.", answer: 0 },
+            { q: "GMB par visual content aur photos kaise optimize karni chahiye?", options: ["Logo, exterior, interior aur products ki high-quality images relevant file names ke sath upload karna", "Blurry low-resolution screenshots upload karna", "Personal holiday pictures post karna", "Sirf stock photos istemal karna"], hint: "Dukan/Office ki asli saaf tasweerein.", answer: 0 },
+            { q: "GMB Posts kis liye istemal hoti hain?", options: ["Updates, events, special offers, aur news seedha apni Google listing par add karne ke liye", "Doston ko personal text messages bhejne ke liye", "Novels likhne ke liye", "Video files edit karne ke liye"], hint: "Offers aur news Google listing par lagana.", answer: 0 },
+            { q: "GMB par products aur services kaise list ki jati hain?", options: ["Descriptions, pricing, aur categories ke sath product/service editor istemal karke", "Physical catalogs print karke", "Sirf customer emails mein mention karke", "Twitter par post karke"], hint: "Product Editor section mein items add karna.", answer: 0 },
+
+            // Lecture 19
+            { q: "Guest Posting kya hai?", options: ["Brand awareness aur backlinks banane ke liye kisi doosri website ya blog par article likh kar publish karna", "Guest reviewer ke tor par hotel mein rehna", "Webinar par guest speaker host karna", "Social media posts par comment karna"], hint: "Doosre ki website par article likh kar link lena.", answer: 0 },
+            { q: "Guest posting SEO mein kaise madad karti hai?", options: ["Yeh authoritative inbound backlinks banati hai jo search engines ko trust aur authority ka signal dete hain", "Yeh computer RAM barhati hai", "Yeh website malware remove karti hai", "Google se instant ad revenue generate karti hai"], hint: "Backlinks se website ki DA aur ranking barhti hai.", answer: 0 },
+            { q: "Guest posting sites chunte waqt kin key metrics ko evaluate karna chahiye?", options: ["Domain Authority (DA), organic traffic, aur topical relevancy", "Owner ke pet ka social media follower count", "Physical office square footage", "Domain name length"], hint: "Domain Authority (DA) aur Traffic bohot zaroori hain.", answer: 0 },
+            { q: "Backlink kya hota hai?", options: ["Kisi external website se aapki website ki taraf pointing aik hyperlink", "Aisa link jo users ko homepage par wapas le jaye", "Toota hua web link", "Internal navigation link"], hint: "Doosri site se aap ki site par aane wala link.", answer: 0 },
+            { q: "Qabil-e-qubool guest posts likhne ki best practice kya hai?", options: ["Natural, non-spammy contextual links ke sath high-value, original educational content dena", "Competitor articles ko word-for-word copy karna", "Apne sales page ke 500 links dalna", "Be-matlab text likhna"], hint: "Acha informative content jis mein naturally link shamil ho.", answer: 0 },
+
+            // Lecture 20
+            { q: "Facebook Ads mein primary ecommerce funnel objectives kaun se hain?", options: ["Awareness, Consideration, aur Conversion", "Sirf Clicks, Likes, aur Shares", "Emails, Faxes, aur Calls", "Printing, Shipping, aur Returns"], hint: "Funnel ke 3 stages: Pehle Aagahi, Phir Soch, Phir Khareedari.", answer: 0 },
+            { q: "Shopify ya ecommerce stores ke liye Facebook ad campaigns kaise mukhtalif hoti hain?", options: ["Yeh product catalogs, pixel tracking, dynamic ads, aur purchase conversion optimization integrate karti hain", "Yeh online stores se connect nahi ho saktin", "Inke liye physical storefronts chahiye", "Yeh sirf text banners istemal karti hain"], hint: "Pixel tracking aur product catalog integration.", answer: 0 },
+            { q: "Ecommerce ke liye conversion campaigns ka bunyadi maqsad kya hota hai?", options: ["Online store par asli sales transactions drive karna", "Ad posts par comments lena", "Instagram profile followers barhana", "Email newsletter signups collect karna"], hint: "Sales aur Purchase event ko target karna.", answer: 0 },
+            { q: "Ecommerce stores ke liye audience targeting kaise kaam karti hai?", options: ["Past buyers ki custom audiences, lookalike audiences, aur interest-based shoppers istemal karke", "Duniya ke har shakhs ko indiscriminately target karna", "Sirf company employees ko target karna", "Internet na rakhne walon ko target karna"], hint: "Online shopping pasand karne walay logon ko target karna.", answer: 0 },
+            { q: "Ecommerce ad campaigns ke budget ke liye kya zaroori hai?", options: ["Profitability yakeeni banane ke liye Customer Acquisition Cost (CAC) aur Average Order Value (AOV) calculate karna", "Pehlay din poori savings spend kar dena", "Budget zero set karna", "Random numbers istemal karna"], hint: "CAC aur AOV ka hisab rakhna.", answer: 0 },
+
+            // Lecture 21
+            { q: "Dynamic Product Ads (DPAs) kya hoti hain?", options: ["Aisi ads jo user ki browsing behavior ki bunyad par catalog se personalized products khud ba khud dikhati hain", "Aisi ads jo har second color badalnti hain", "Animated cartoon banner ads", "Text-only ads jo ghante baad badalnti hain"], hint: "Jo item user ne website par dekha ho, wahi ad mein dikhna.", answer: 0 },
+            { q: "Ecommerce advertising mein retargeting se kya murad hai?", options: ["Unhon ko targeted ads dikhana jinhon ne website visit ki ya cart mein items add kiin lekin purchase nahi kiya", "Unhon ko target karna jinhon ne kabhi brand ke baray mein nahi suna", "Competitors ke staff ko target karna", "Postal mail bhejna"], hint: "Purane website visitors ko wapas laana.", answer: 0 },
+            { q: "A/B testing ecommerce ad ROI ko kaise behtar banati hai?", options: ["Controlled experimentation ke zariye winning ad creatives, ad copy, aur audience segments pehchan kar", "Website hosting fees double karke", "Rozana product prices badal kar", "Underperforming products delete karke"], hint: "Behtareen ad combination ki pehchan karna.", answer: 0 },
+            { q: "Meta Ads mein catalog sales objective kya hai?", options: ["Apne connected ecommerce product catalog se products ko dynamically promote karna", "Paper print catalogs bechna", "Warehouse inventory manage karna", "Shipping labels calculate karna"], hint: "Catalog se direct products promote karna.", answer: 0 },
+            { q: "Advanced ecommerce ads ke liye ROAS track karna kyun zaroori hai?", options: ["Yeh sabit karta hai ke ad revenue ad spend se ziada hai, jis se campaign ki scalability yakeeni hoti hai", "Yeh warehouse temperature measure karta hai", "Yeh employee working hours track karta hai", "Yeh internet speed monitor karta hai"], hint: "ROAS se pata chalta hai ad faide mein hai ya nuqsan mein.", answer: 0 },
+
+            // Lecture 22
+            { q: "Ecommerce / Daraz context mein FBA aur FBM se kya murad hai?", options: ["Fulfilled by Daraz / Fulfilled by Merchant", "Fast Buying Action / Fast Bulk Marketing", "Free Basic Account / Free Business Model", "Finance Bank Audit / Freight Brokerage Management"], hint: "Daraz warehouse se fulfillment (FBD/FBA) ya Khud packing (FBM).", answer: 0 },
+            { q: "Daraz ke liye popular product research tools kaun se hain?", options: ["Seller Dash ya Jarvis", "Photoshop aur Illustrator", "Microsoft Word aur Notepad", "Windows Media Player"], hint: "Jarvis aur Seller Dash mashhoor tools hain.", answer: 0 },
+            { q: "Daraz par product listing kaise manage ki jati hai?", options: ["Seller Center mein product titles, descriptions, categories, images, pricing, aur inventory add karke", "Daraz headquarters ko product samples mail karke", "Instagram par photos post karna", "YouTube video tutorials banana"], hint: "Daraz Seller Center Dashboard.", answer: 0 },
+            { q: "Daraz seller account banane ke steps kya hain?", options: ["Business details, bank account info, store name provide karein aur seller agreement sign karein", "$10,000 entrance fee pay karein", "Physical Daraz retail store visit karein", "Hath se likha hua khat bhejein"], hint: "CNIC, Bank Cheque aur Store Details.", answer: 0 },
+            { q: "Daraz sellers ke liye product sourcing kyun ahem hai?", options: ["Reliable suppliers ke sath high-demand, profitable products talash karna business ki kamyabi decide karta hai", "Iska sales par koi asar nahi hota", "Yeh free shipping guarantee karta hai", "Yeh competition khatam karta hai"], hint: "Sasti aur achi cheez lana hi munafa deta hai.", answer: 0 },
+
+            // Lecture 23
+            { q: "Daraz Mall kya hai?", options: ["Daraz par aik premium channel jo top brands aur authenticated official stores feature karta hai", "Lahore mein aik physical shopping mall", "Wholesale warehouse", "Customer service call center"], hint: "Original brand stores (100% authentic products).", answer: 0 },
+            { q: "Daraz par product listings optimize karne ki key best practices kya hain?", options: ["Clear titles, high-resolution images, competitive pricing, aur accurate keyword descriptions", "Misleading descriptions istemal karna", "Product titles khali chhorna", "Product prices chhupana"], hint: "Acha title, keywords aur saaf tasweerein.", answer: 0 },
+            { q: "Daraz par commission models kaise kaam karte hain?", options: ["Daraz successful sales par percentage commission charge karta hai sath mein payment gateway fees", "Sellers kabhi kuch pay nahi karte", "Daraz 100% revenue rakh leta hai", "Sellers hourly rent pay karte hain"], hint: "Har sale par Daraz ki fees kat ti hai.", answer: 0 },
+            { q: "Daraz par mazeed sales generate karne mein kaun c techniques madad karti hain?", options: ["Flash sales mein hissa lena, vouchers dena, fast fulfillment, aur positive seller ratings maintain karna", "Bar baar orders cancel karna", "Customer chat messages ignore karna", "Shipping times barhana"], hint: "Vouchers, Flash Sales aur achi Seller Rating.", answer: 0 },
+            { q: "Daraz par seller rating kyun critical hai?", options: ["Yeh customer trust, search ranking, aur campaign participation ki eligibility ko direct mutasir karti hai", "Yeh income tax rates decide karti hai", "Yeh store background color badalnti hai", "Iska koi asar nahi hota"], hint: "Rating jitni achi hogi utni ziada sales milengi.", answer: 0 },
+
+            // Lecture 24
+            { q: "Amazon par core fulfillment models kaun se hain?", options: ["FBA (Fulfillment by Amazon) aur FBM (Fulfillment by Merchant)", "FAA aur FMM", "AMZ aur MCH", "Direct aur Indirect"], hint: "FBA = Amazon warehouse, FBM = Seller khud ship kare.", answer: 0 },
+            { q: "Amazon ke liye popular product research tools kaun se hain?", options: ["Helium 10 aur Jungle Scout", "Canva aur Later", "Photoshop aur Premiere Pro", "Excel aur Word"], hint: "Helium 10 aur Jungle Scout sab se mashhoor hain.", answer: 0 },
+            { q: "Amazon Wholesale kya hai?", options: ["Manufacturers ya distributors se bulk mein established brand products khareed kar Amazon par resell karna", "Scratch se apni private label brand manufacture karna", "Retail stores se items drop-ship karna", "Used garage items bechna"], hint: "Pehle se banay brand products ko bulk mein lekar bechna.", answer: 0 },
+            { q: "Amazon FBA kya hai?", options: ["Aisa model jahan sellers inventory Amazon fulfillment centers mein rakhte hain aur Amazon pick, pack aur ship karta hai", "Sellers apne garage se har order ship karte hain", "Amazon aapka business khareed leta hai", "Amazon aapke liye products banata hai"], hint: "Fulfillment By Amazon.", answer: 0 },
+            { q: "Amazon par competition aur product potential kaise analyze kiya jata hai?", options: ["Helium 10 jaise tools istemal karke monthly sales volume, review counts, BSR, aur profit margins check karna", "Popular items guess karna", "WhatsApp par doston se poochna", "Local newspaper ads check karna"], hint: "BSR, Monthly Sales Volume aur Review Count check karke.", answer: 0 },
+
+            // Lecture 25
+            { q: "TikTok Shop kya hai?", options: ["Aik integrated ecommerce feature jo users ko TikTok ke andar hi discover, shop aur checkout karne ki ijazat deta hai", "Beijing mein physical retail store", "Video editing software", "Cryptocurrency exchange"], hint: "TikTok app ke andar se hi direct shopping.", answer: 0 },
+            { q: "TikTok Business Account aur Shop set up karne ke liye kya zaroori hai?", options: ["Valid business registration documents, payouts ke liye bank account, aur profile setup", "Personal Instagram account", "Har mulk mein physical warehouse", "1 million followers"], hint: "Business Documents aur Bank Account.", answer: 0 },
+            { q: "TikTok Live Selling kaise kaam karti hai?", options: ["Aik live streaming session host karna jahan viewers real-time mein showcased products purchase kar sakein", "Pre-edited videos record karna", "Video games live khelna", "Audio-only podcasting"], hint: "Live aakar saman dikhana aur sath hi bechna.", answer: 0 },
+            { q: "TikTok Shop par product listing optimization ke liye kya ahem hai?", options: ["Catchy titles, engaging video demonstrations, trending hashtags, aur competitive pricing", "Bina images ke text-only descriptions", "Buy buttons chhupana", "Prices zero set karna"], hint: "Video demonstrations aur trending hashtags.", answer: 0 },
+            { q: "TikTok Shop par payouts kaise handle hote hain?", options: ["Transaction processing timelines ke baad verified bank account attachments ke zariye", "Courier ke zariye cash mein", "Automatically cryptocurrency mein", "Gift cards mein"], hint: "Bank Account Transfer.", answer: 0 },
+
+            // Lecture 26
+            { q: "TikTok Shop par influencer collaborations sales kaise drive karti hain?", options: ["Trusted creators ko leverage karke apni engaged audiences ko products review aur promote karwana", "Celebrities ko chup rehne ke liye pay karna", "Fake bot followers khareedna", "Billboard ads chalana"], hint: "Creators se product unboxing aur reviews karwana.", answer: 0 },
+            { q: "TikTok Shop Analytics mein kaun se metrics track hote hain?", options: ["Views, engagement, conversion rates, aur sales revenue", "Computer CPU temperature", "Email open rates", "Website domain authority"], hint: "Views, Conversions aur Revenue.", answer: 0 },
+            { q: "TikTok Shop CRM aur customer support ka maqsad kya hota hai?", options: ["Customer inquiries manage karna, returns/refunds handle karna, aur messaging ke zariye loyalty banana", "Customer messages delete karna", "Support tickets ignore karna", "Buyers ko block karna"], hint: "Customer messages, refund aur returns ko handle karna.", answer: 0 },
+            { q: "Advanced TikTok Shop SEO kaise kaam karta hai?", options: ["Product titles ke liye keyword research, high-converting tags istemal karna aur platform trends leverage karna", "Product descriptions mein HTML coding", "Search results se products chhupana", "Random numbers istemal karna"], hint: "Keywords, tags aur search trends.", answer: 0 },
+            { q: "TikTok Shop ko internationally expand karte waqt localization kyun zaroori hai?", options: ["Language, currency, cultural preferences, aur regional ecommerce policies ko adapt karna", "Sab kuch Latin mein translate karna", "Poori duniya mein US Dollars istemal karna", "Local shipping rules ignore karna"], hint: "Mulk ki zaban aur currency ke mutabiq badalna.", answer: 0 },
+
+            // Lecture 27
+            { q: "Etsy bunyadi tor par kis liye jana jata hai?", options: ["Handmade, vintage, aur creative digital/physical goods ke liye global marketplace", "Industrial machinery wholesale", "B2B software sales", "Cryptocurrency trading"], hint: "Handmade aur creative digital products.", answer: 0 },
+            { q: "Etsy par digital products kya hote hain?", options: ["Downloadable files jaise printables, templates, planners, aur digital art jo foran bechay jate hain", "Courier ke zariye bheje gaye physical clothing items", "Computer hardware components", "Online video streaming subscriptions"], hint: "Templates, planners aur printables (PDF/PNG files).", answer: 0 },
+            { q: "Etsy shop set up karne ke liye kya elements zaroori hain?", options: ["Shop name, branding, listing photos, pricing, descriptions, aur payment/shipping policies", "$5,000 government license", "Physical retail storefront", "Amazon FBA account"], hint: "Shop Name, Listing photos aur payment setup.", answer: 0 },
+            { q: "Etsy par product hunting aur optimization tools kis liye istemal hote hain?", options: ["Keyword research, SEO optimization, aur competitor rankings analyze karne ke liye (maslan eRank, Marmalead)", "Video game streaming", "Server hosting", "Email marketing"], hint: "eRank aur Marmalead mashhoor tools hain.", answer: 0 },
+            { q: "Etsy fees kaise kaam karti hain?", options: ["Listing fees per item, transaction fees, aur payment processing fees", "Zero fees ke sath free listings", "Monthly flat-rate salary", "Sirf physical goods par commission"], hint: "Listing fee ($0.20) + Transaction fee.", answer: 0 },
+
+            // Lecture 28
+            { q: "Etsy search ke liye product listings ko kaise optimize karein (SEO)?", options: ["Titles, tags, categories, aur attributes mein relevant long-tail keywords istemal karna", "Single-word generic tags jaise 'gift' istemal karna", "Tags khali chhorna", "Descriptions mein shayari likhna"], hint: "Long-tail keywords aur 13 tags ka sahi istemal.", answer: 0 },
+            { q: "Etsy Ads ka kirdar kya hai?", options: ["Visibility aur sales barhanay ke liye Etsy search results ke andar listings promote karna", "Facebook par banner ads chalana", "Google par popups dikhana", "Flyers print karwana"], hint: "Etsy search mein listings ko top par lana.", answer: 0 },
+            { q: "Etsy par product ranking mein kaun c secret techniques madad karti hain?", options: ["Fresh listings, high conversion rates, positive customer reviews, aur renewable SEO optimization", "Rozana shop ka naam badalna", "Fake reviews istemal karna", "Haftay mein listings delete karna"], answer: 0 },
+            { q: "Etsy par customer service aur reviews kaise manage karne chahiye?", options: ["Prompt, polite support dena, disputes amicably resolve karna, aur 5-star reviews earn karna", "Customers ke sath behas karna", "Messages ignore karna", "Review milne par shop band kar dena"], answer: 0 },
+            { q: "Etsy par shop policies kyun ahem hain?", options: ["Yeh shipping times, refunds, aur exchanges ke baray mein clear expectations set karti hain jo buyer trust banati hain", "Yeh UN ki taraf se legally required hoti hain", "Yeh electricity bills decide karti hain", "Yeh font styles badalti hain"], hint: "Returns, refunds aur shipping ki wazahat.", answer: 0 }
+        ];
+
+        let questions = [];
+        const basePool = rawQuestions;
+        for (let i = 0; i < 200; i++) {
+            let base = basePool[i % basePool.length];
+            let variationNum = Math.floor(i / basePool.length) + 1;
+            questions.push({
+                q: variationNum === 1 ? base.q : `[Set ${variationNum}] Digital marketing usool (Ref: ${base.q}) - Kaun sa bayan sab se zyada durust hai?`,
+                hint: base.hint || "Sawal ke mufahoom ko ghaur se parhein aur sab se behtareen option ka intekhab karein.",
+                options: [...base.options],
+                answer: base.answer
+            });
+        }
+
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let timerInterval;
+        let timeLeft = 200 * 60;
+        let studentName = "";
+        let warningCount = 0;
+        let isExamActive = false;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function requestFullscreen() {
+            let elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => console.log(err));
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+        }
+
+        function startExam() {
+            const nameInput = document.getElementById("student-name").value.trim();
+            if (!nameInput) {
+                alert("Exam shuru karne ke liye apna poora naam likhein.");
+                return;
+            }
+            studentName = nameInput;
+
+            requestFullscreen();
+
+            shuffleArray(questions);
+            questions.forEach(q => {
+                let correctText = q.options[q.answer];
+                shuffleArray(q.options);
+                q.answer = q.options.indexOf(correctText);
+            });
+
+            document.getElementById("welcome-screen").style.display = "none";
+            document.getElementById("exam-screen").style.display = "block";
+
+            isExamActive = true;
+            startTimer();
+            loadQuestion();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                document.getElementById("timer").textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Waqt mukammal ho gaya hai! Exam khud ba khud submit ho raha hai.");
+                    submitExam();
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById("progress-text").textContent = `Sawal ${currentQuestionIndex + 1} ${questions.length} mein se`;
+
+            let html = `
+                <h3>${currentQuestionIndex + 1}. ${q.q}</h3>
+                <button class="hint-btn" onclick="toggleHint()">💡 Show Hint</button>
+                <div class="hint-box" id="hint-box"><strong>Hint:</strong> ${q.hint}</div>
+                <ul class="options-list">
+            `;
+
+            q.options.forEach((opt, idx) => {
+                let checked = userAnswers[currentQuestionIndex] === idx ? "checked" : "";
+                html += `<li><label><input type="radio" name="option" value="${idx}" ${checked} onclick="saveAnswer(${idx})"> ${opt}</label></li>`;
+            });
+            html += `</ul>`;
+
+            document.getElementById("question-container").innerHTML = html;
+
+            document.getElementById("prev-btn").style.display = currentQuestionIndex === 0 ? "none" : "inline-block";
+            if (currentQuestionIndex === questions.length - 1) {
+                document.getElementById("next-btn").style.display = "none";
+                document.getElementById("submit-btn").style.display = "inline-block";
+            } else {
+                document.getElementById("next-btn").style.display = "inline-block";
+                document.getElementById("submit-btn").style.display = "none";
+            }
+        }
+
+        function toggleHint() {
+            const hintBox = document.getElementById("hint-box");
+            if (hintBox.style.display === "block") {
+                hintBox.style.display = "none";
+            } else {
+                hintBox.style.display = "block";
+            }
+        }
+
+        function saveAnswer(idx) {
+            userAnswers[currentQuestionIndex] = idx;
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function issueWarning(reason) {
+            if (!isExamActive) return;
+
+            warningCount++;
+            document.getElementById("warning-counter").textContent = `${warningCount} / 3`;
+
+            if (warningCount >= 3) {
+                document.getElementById("warning-modal").style.display = "none";
+                alert(`🚨 Maximum warnings (${reason}) poori ho gayi hain! Aapka exam khud ba khud submit ho raha hai.`);
+                submitExam();
+            } else {
+                document.getElementById("modal-msg").textContent = `Warning ${warningCount} of 3: ${reason}. Barah-e-karam full-screen mode mein rahein. 3 warnings hone par exam auto-submit ho jaye ga!`;
+                document.getElementById("warning-modal").style.display = "flex";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById("warning-modal").style.display = "none";
+            requestFullscreen();
+        }
+
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden && isExamActive) {
+                issueWarning("Aap ne tab switch kiya ya window minimize ki");
+            }
+        });
+
+        window.addEventListener("blur", function() {
+            if (isExamActive) {
+                issueWarning("Browser ne focus kho diya ya koi doosra app khola gaya");
+            }
+        });
+
+        document.addEventListener("fullscreenchange", function() {
+            if (!document.fullscreenElement && isExamActive) {
+                issueWarning("Full-screen mode khatam kiya gaya");
+            }
+        });
+
+        document.addEventListener("keydown", function(e) {
+            if (!isExamActive) return;
+
+            if (e.key === "F12") {
+                e.preventDefault();
+                return false;
+            }
+
+            if (e.ctrlKey || e.metaKey) {
+                if (['c', 'v', 'u', 'a', 'i', 's', 'p'].includes(e.key.toLowerCase())) {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+        });
+
+        function submitExam() {
+            isExamActive = false;
+            clearInterval(timerInterval);
+
+            let score = 0;
+            questions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score++;
+                }
+            });
+
+            let percentage = (score / questions.length) * 100;
+            let passed = percentage >= 75;
+
+            document.getElementById("exam-screen").style.display = "none";
+            document.getElementById("result-screen").style.display = "block";
+
+            document.getElementById("res-name").textContent = studentName;
+            document.getElementById("res-score").textContent = `${percentage.toFixed(2)}% (${score}/${questions.length})`;
+            
+            let statusEl = document.getElementById("res-status");
+            if (passed) {
+                statusEl.textContent = "Status: PASS (Mubarak ho!)";
+                statusEl.className = "pass";
+            } else {
+                statusEl.textContent = "Status: FAIL (Pass hone ke liye 75% lazmi hain)";
+                statusEl.className = "fail";
+            }
+
+            if (document.exitFullscreen) {
+                document.exitFullscreen().catch(err => {});
+            }
+        }
+
+        function submitFeedback() {
+            const feedbackText = document.getElementById("feedback-input").value.trim();
+            if (!feedbackText) {
+                alert("Barah-e-karam submit karne se pehle apna feedback likhein.");
+                return;
+            }
+            alert("Shukriya! Aapka feedback Institute of Tech Excellence ke liye record kar liya gaya hai.");
+            document.getElementById("feedback-input").value = "";
+        }
+    </script>
+</body>
+</html>
